@@ -44,5 +44,14 @@ public class BbsService {
 
         return rstMap;
     }
+
+    public Map<String, Object> readBbsDetails(String bbsCd) {
+
+        Map<String , Object> rstMap = new HashMap<>();
+
+        rstMap.put("data", bbsRepository.findByBbsCd(bbsCd));
+
+        return rstMap;
+    }
     
 }

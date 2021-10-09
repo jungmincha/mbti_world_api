@@ -5,5 +5,7 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface BbsRepository extends CrudRepository<BbsEntity , String>{
+
+    BbsEntity findByBbsCd(String bbsCd);
     
 }
