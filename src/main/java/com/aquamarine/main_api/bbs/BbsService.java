@@ -1,9 +1,13 @@
 package com.aquamarine.main_api.bbs;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.ObjectUtils;
@@ -14,12 +18,22 @@ public class BbsService {
     @Autowired
     BbsRepository bbsRepository;
 
-    @Autowired
-    BbsRepoSupport bbsRepoSupport;
+    // @Autowired
+    // BbsRepoSupport bbsRepoSupport;
 
     public Map<String, Object> searchBbsList(BbsFilterDto bbsFilterDto) {
+        Map<String, Object> dataMap = new HashMap<>();
+       
+        try{
+            PageRequest pageRequest = PageRequest.of(bbsFilterDto.getPage(), bbsFilterDto.getSize());
 
-        return bbsRepoSupport.searchBbsList(bbsFilterDto);
+            dataMap.put("list", bbsRepository.findByDelYnOrderByWriteDtDesc("N" , pageRequest));
+        }catch(Exception e) {
+            dataMap.put("errmsg", e.getMessage());
+            dataMap.put("errmsg2", e.getCause());
+        }
+
+        return dataMap;
     }
 
     @Transactional
@@ -28,7 +42,7 @@ public class BbsService {
         Map<String , Object> rstMap = new HashMap<>();
 
         try{
-            bbsEntity.setDel_yn("N");
+            bbsEntity.setDelYn("N");
 
             bbsRepository.save(bbsEntity);
 
