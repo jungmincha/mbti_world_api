@@ -12,6 +12,6 @@ public interface BbsRepository extends CrudRepository<BbsEntity , String>{
 
     BbsEntity findByBbsCd(String bbsCd);
 
-     Page<BbsEntity>findByDelYnOrderByWriteDtDesc(String delYn, Pageable pageable);
+    Page<BbsEntity>findByDelYnAndTitleLikeOrderByWriteDtDesc(String delYn, String searchParam, Pageable pageable);
     
 }

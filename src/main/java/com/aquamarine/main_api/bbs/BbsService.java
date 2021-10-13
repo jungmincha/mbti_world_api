@@ -27,7 +27,7 @@ public class BbsService {
         try{
             PageRequest pageRequest = PageRequest.of(bbsFilterDto.getPage(), bbsFilterDto.getSize());
 
-            dataMap.put("list", bbsRepository.findByDelYnOrderByWriteDtDesc("N" , pageRequest));
+            dataMap.put("list", bbsRepository.findByDelYnAndTitleLikeOrderByWriteDtDesc("N" , "%" + bbsFilterDto.getSearchParam() + "%", pageRequest));
         }catch(Exception e) {
             dataMap.put("errmsg", e.getMessage());
             dataMap.put("errmsg2", e.getCause());

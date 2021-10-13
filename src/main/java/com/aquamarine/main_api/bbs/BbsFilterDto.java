@@ -7,6 +7,8 @@ public class BbsFilterDto {
 
     private String bbsCd;
 
+    private String searchParam;
+
     private int size;
 
     private int page;
