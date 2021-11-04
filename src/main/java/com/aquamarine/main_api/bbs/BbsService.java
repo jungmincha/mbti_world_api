@@ -23,17 +23,23 @@ public class BbsService {
 
     public Map<String, Object> searchBbsList(BbsFilterDto bbsFilterDto) {
         Map<String, Object> dataMap = new HashMap<>();
+        Map<String, Object> rtMap = new HashMap<>();
        
         try{
             PageRequest pageRequest = PageRequest.of(bbsFilterDto.getPage(), bbsFilterDto.getSize());
 
             dataMap.put("list", bbsRepository.findByDelYnAndTitleLikeOrderByWriteDtDesc("N" , "%" + bbsFilterDto.getSearchParam() + "%", pageRequest));
+
+            if(!ObjectUtils.isEmpty(dataMap)){
+                rtMap.put("code", "S");
+                rtMap.put("data", dataMap);
+            }
         }catch(Exception e) {
-            dataMap.put("errmsg", e.getMessage());
-            dataMap.put("errmsg2", e.getCause());
+            rtMap.put("errmsg", e.getMessage());
+            rtMap.put("errmsg2", e.getCause());
         }
 
-        return dataMap;
+        return rtMap;
     }
 
     @Transactional
@@ -47,7 +53,7 @@ public class BbsService {
             bbsRepository.save(bbsEntity);
 
             rstMap.put("code", "S");
-            rstMap.put("bbsEntity" , bbsEntity);
+            rstMap.put("data" , bbsEntity);
 
         }catch(Exception e){
             rstMap.put("code", "E");

@@ -10,6 +10,8 @@ public class ClsFilterDto {
     private int size;
 
     private int page;
+    
+    private String mbrId;
 
 
 }

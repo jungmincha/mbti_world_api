@@ -30,6 +30,18 @@ public class ClsEntity {
     @GeneratedValue(generator="gen_cls_cd")
     private String clsCd;
 
+    // @Formula(value = "("
+    //         +"select count(*) from am_like al where al.code = cls_cd and al.like_yn = 'Y'"
+    //         +")")
+    // @Transient
+    // private int likeCnt;
+
+    @Transient
+    private Long clsLikeCtn;
+
+    @Transient
+    private String likeYn;
+
     @Column
     private String clsTitle;
 
@@ -56,10 +68,7 @@ public class ClsEntity {
 
     @Column
     private String attachFile;
-
-    @Column
-    private int likeCnt;
-
+    
     @Column
     private String tag;
 

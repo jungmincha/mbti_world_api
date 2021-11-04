@@ -11,6 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
+import org.hibernate.annotations.CollectionId;
 import org.hibernate.annotations.Formula;
 import org.hibernate.annotations.GenericGenerator;
 import org.springframework.data.annotation.CreatedDate;
@@ -56,6 +57,14 @@ public class BbsEntity {
 
     @Column
     private String writeId;
+
+    @Column
+    private String writeNickname;
+
+    // @Formula(value = "("
+    //         +"select b.mbr_nickname from am_mbr_info b where b.mbr_id = write_id"
+    //         +")")
+    // private String mbrNickname;
 
     @CreatedDate
     @Column(updatable = false)
