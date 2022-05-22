@@ -21,7 +21,7 @@ import io.swagger.annotations.ApiOperation;
 @RestController
 @RequestMapping("/api/bbs")
 public class BbsController {
-
+    //haha
     @Autowired
     BbsService bbsService;
 
